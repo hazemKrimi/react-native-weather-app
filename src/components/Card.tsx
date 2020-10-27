@@ -7,7 +7,6 @@ export interface Props {
     data: string,
     icon: string,
     time: boolean,
-    temp?: 'hot' | 'cold' | null,
     description?: string
 }
  
@@ -22,7 +21,7 @@ const Card: React.FC<Props> = ({ date, time, data, icon, description }) => {
                 style={styles.icon}
                 source={{ uri: `http://openweathermap.org/img/wn/${icon}@2x.png` }}
             />
-            <Text style={styles.description}>{description && description}</Text>
+            { description && <Text style={styles.description}>{description}</Text> }
         </View>
     );
 };
