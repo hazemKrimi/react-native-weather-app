@@ -204,8 +204,10 @@ const Home: React.FC<HomeProps> = () => {
                         </Container>
                     </ScrollView>
                 ) : (
-                    <View style={[styles.wrapper, { height: hp('100%'), alignItems: 'center' }]}>
-                        <Text style={styles.error}>{error}</Text>
+                    <View style={styles.wrapper}>
+                        <View style={styles.errorWrapper}>
+                            <Text style={styles.error}>{error}</Text>
+                        </View>
                     </View>
                 )
             }
@@ -237,6 +239,12 @@ const styles = StyleSheet.create({
     sectionTitle: {
         fontFamily: 'Poppins-Bold',
         fontSize: hp('4.5%')
+    },
+    errorWrapper: {
+        height: hp('80%'),
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     error: {
         fontFamily: 'Poppins-Bold',
