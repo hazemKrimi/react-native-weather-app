@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { StatusBar } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, NavigationContainerRef } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StackParams } from './types/types';
 import Home from './screens/Home';
@@ -11,6 +11,12 @@ import NavBar from './components/NavBar';
 const Stack = createStackNavigator<StackParams>();
 
 const App: React.FC = () => {
+  const navigationRef = useRef<NavigationContainerRef | null>(null);
+
+  const navigate = (name: string, params: object) => {
+    navigationRef.current?.navigate(name, params);
+  }
+
   useEffect(() => {
     SplashScreen.hide();
   }, []);
@@ -21,8 +27,8 @@ const App: React.FC = () => {
         barStyle='dark-content'
         backgroundColor='white'
       />
-      <NavBar />
-      <NavigationContainer>
+      <NavBar navigate={navigate} />
+      <NavigationContainer ref={navigationRef}>
         <Stack.Navigator initialRouteName='Home'>
           <Stack.Screen
             name='Home'

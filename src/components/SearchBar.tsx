@@ -3,8 +3,15 @@ import { StyleSheet, View, TextInput } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
  
-const SearchBar: React.FC = () => {
+const SearchBar: React.FC<{ navigate: (name: string, params: object) => void }> = ({ navigate }) => {
     const [ query, setQuery ] = useState<string>('');
+
+    const search = () => {
+        if (query !== '') {
+            navigate('Search', { query });
+            setQuery('');
+        }
+    };
 
     return (
         <View style={styles.wrapper}>
@@ -13,7 +20,9 @@ const SearchBar: React.FC = () => {
                 placeholderTextColor='rgba(0, 0, 0, 0.5)'
                 placeholder='Search'
                 onChangeText={text => setQuery(text)}
+                onSubmitEditing={search}
                 keyboardType='web-search'
+                returnKeyType='search'
                 value={query}
             />
             <Icon

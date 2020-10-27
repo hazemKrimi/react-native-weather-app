@@ -4,12 +4,12 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Container from './Container';
 import SearchBar from './SearchBar';
 
-const NavBar: React.FC = () => {
+const NavBar: React.FC<{ navigate: (name: string, params: object) => void }> = ({ navigate }) => {
     return (
         <Container>
             <View style={styles.nav}>
                 <Text style={styles.title}>Weather</Text>
-                <SearchBar />
+                <SearchBar navigate={navigate} />
             </View>
         </Container>
     );
@@ -17,7 +17,7 @@ const NavBar: React.FC = () => {
 
 const styles = StyleSheet.create({
     nav: {
-        paddingTop: hp('1%'),
+        paddingTop: hp('1.5%'),
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around'
